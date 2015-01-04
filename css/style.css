@@ -1,0 +1,143 @@
+@charset "utf-8";
+/* CSS Document */
+
+body {
+	margin: 0;
+	padding: 0;
+	text-align:center;
+	background:#333333;
+}
+
+#header {
+	width: 100%;
+	height: 50px;
+	position:fixed top;
+	text-align:center;
+	padding: 15px;
+	background:#222222
+}
+
+.headerTitle {
+	width:300px;
+	height: 40px;
+	float:left;
+	color:#64B8D0;
+	text-align:center;
+	font-family:Consolas, "Andale Mono", "Lucida Console", "Lucida Sans Typewriter", Monaco, "Courier New", monospace;
+	font-size:36px;
+}
+
+#container {
+	width: 962px;
+	height: auto;
+	min-height: 400px;
+	padding:20px;
+	margin:0 auto 0 auto;
+	background:#222222;
+	border: 1px #333333 solid;
+}
+
+#loginContainer {
+	width: 300px;
+	height: auto;
+	min-height: 200px;
+	padding:20px;
+	margin:25px auto 25px auto;
+	background:#222222;
+	border: 1px #333333 solid;
+}
+
+#postContainer {
+	width: 800px;
+	height: auto;
+	min-height: 200px;
+	padding: 20px;
+	margin: 25px auto 25px auto;
+	background: #222222;
+}
+#postBox {
+	width: 750px;
+	height: auto;
+	min-height: 100px;
+	padding: 5px;
+	background: #333333;
+	margin-left:auto;
+	margin-right:auto;
+	clear:both;
+	float:none;
+}
+
+#postBoxContent {
+		width: 100%;
+		height:auto;
+		min-height:50px;
+		text-align:left;
+		margin: 5px;
+		color:#64B8D0;
+		font-family:Consolas, "Andale Mono", "Lucida Console", "Lucida Sans Typewriter", Monaco, "Courier New", monospace;
+		font-size:18px;
+}
+
+h1 {
+	color:#C96933;
+	font-family:Consolas, "Andale Mono", "Lucida Console", "Lucida Sans Typewriter", Monaco, "Courier New", monospace;
+}
+
+.loginForm {
+	width: 300px;
+	height: 30px;
+	background:#333333;
+	border:#000000 3px;
+	text-align: center;
+	color:#64B8D0;
+	font-family:Consolas, "Andale Mono", "Lucida Console", "Lucida Sans Typewriter", Monaco, "Courier New", monospace;
+	font-size:18px;
+}
+
+.postForm {
+	width: 750px;
+	height: 150px;
+	background:#333333;
+	text-align:left;
+	color:#64B8D0;
+	border:#000000 1px;
+	font-family:Consolas, "Andale Mono", "Lucida Console", "Lucida Sans Typewriter", Monaco, "Courier New", monospace;
+	font-size:18px;
+	margin-left:auto;
+	margin-right:auto;
+	padding: 5px;
+}
+
+.rightJustified {
+	text-align:right;
+	margin-right:25px;
+}
+
+.lineDecoration {
+	width: 750px;
+	height: 2px;
+	background:url(../img/line.jpg);	
+	margin-left:auto;
+	margin-right:auto;
+}
+
+.lineDecorationBlack {
+	width: 750px;
+	height: 2px;
+	background:url(../img/blackline.jpg);
+	margin-left:auto;
+	margin-right:auto;	
+	clear:both;
+}
+
+.PostBoxTitles {
+	float:left;
+	width:200px;
+	height:20px;
+	margin:5px;
+	padding:6px;
+	text-align:left;
+	color:#C96933;
+	font-size:18px;
+	font-family:Consolas, "Andale Mono", "Lucida Console", "Lucida Sans Typewriter", Monaco, "Courier New", monospace;
+}
