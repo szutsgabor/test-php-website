@@ -2,9 +2,8 @@
 session_start();						//session indítása
 $isPageRequireLogin = true;
 include("mysql/mysql_connect.php"); 	//mysql adatokat tároló file beolvasása
-include("mysql/mysql_columns.php");		//mysql oszlopneveket tároló file beolvasása
 include("php/cookie_login.php");		//Cookie bejelentkezés
-include("php/reg_check.php");			//bejelentkezési adatokat feldolgozó php file
+include("php/comments_script.php");		//Kommenteket feldolgozó php file
 ?>
 <!doctype html>
 <html>
@@ -17,46 +16,47 @@ include("php/reg_check.php");			//bejelentkezési adatokat feldolgozó php file
 
 	<body>
 		<div id="header">
-			<div class="headerTitle">
-				Test website
+			<div class="headerTitle"> 
+				Test website 
+			</div>
+			<div class="PostBoxTitles"> 
+				<a href="logout.php">
+					kijelentkezés
+				</a> 
 			</div>
 		</div>
-        
 		<div id="postContainer">
-        	<form id="postForm" action="posts.php" name="postForm" method="post">
-            	<p>
-                	<textarea name="txtContent" class="postForm" form="PostForm" rows="5" placeholder="Mond el mi jár a fejedben?"></textarea>
-                </p>
-                <p>
-               	  <input type="button" name="btnPost" class="loginForm" form="postForm" value="Küldés" >
-                </p>
-            </form>
-            <p class="lineDecoration">
-        	</p>
-            <div id="postBox">
-              <div class="PostBoxTitles">15.01.03 </div>
-            	<div class="PostBoxTitles">
-                	szutsgabor
-            	</div>
-                <div class="PostBoxTitles">
-                	0 hozzászólás
-           	  </div>
-                <div class="lineDecorationBlack" style="left: 174px; top: 476px;">
-                </div>
-              <div id="postBoxContent">
-                	<p>
-                    	lolxcyc
-                        xcxc
-                        cxxc
-                    </p>
-                <p>
-                    	lolxcycxcxc
-                        xcxcxc
-                    </p>
-                    <p>
-                    	lolxcyc                </p>
-              </div>
-            </div>
+			<div id="postBox">
+				<div class="PostBoxTitles"> 
+					<?php echo $postData['postdate']; ?> 
+				</div>
+				<div class="PostBoxTitles"> 
+					<?php echo $postData['username']; ?> 
+				</div>
+				<div class="PostBoxTitles"> 
+					<a href="posts.php">
+						Vissza
+					</a> 
+				</div>
+				<div class="lineDecorationBlack"> 
+				</div>
+				<div id="postBoxContent">
+					<p> 
+						<?php echo $postData['content']; ?> 
+					</p>
+				</div>
+			</div>
+			<form id="commentForm" action="comments.php?postID=<?php echo"$postID"; ?>" name="commentForm" method="post">
+				<p>
+					<textarea name="txtContent" id="txtContent" wrap="physical" class="postForm" placeholder="Megkommentelem jól"></textarea>
+				</p>
+				<p>
+					<input type="button" name="btnPost" class="loginForm" form="commentForm" value="Küldés" onClick="return 		postFormCheck(this.form, this.form.txtContent);">
+				</p>
+			</form>
+			<p class="lineDecoration"> 
+			</p>
+			<?php include("php/comments_print.php"); ?>
 		</div>
 	</body>
 </html>

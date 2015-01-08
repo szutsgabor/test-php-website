@@ -1,6 +1,26 @@
 @charset "utf-8";
 /* CSS Document */
 
+a:link {
+	color: #C96933;
+	text-decoration: none;
+}
+
+a:visited {
+	text-decoration: none;
+	color: #C96933;
+}
+
+a:hover {
+	text-decoration: none;
+	color: #64B8D0;
+}
+
+a:active {
+	text-decoration: none;
+	color: #C96933;
+}
+
 body {
 	margin: 0;
 	padding: 0;
@@ -55,6 +75,7 @@ body {
 	margin: 25px auto 25px auto;
 	background: #222222;
 }
+
 #postBox {
 	width: 750px;
 	height: auto;
@@ -63,6 +84,7 @@ body {
 	background: #333333;
 	margin-left:auto;
 	margin-right:auto;
+	margin-top:10px;
 	clear:both;
 	float:none;
 }

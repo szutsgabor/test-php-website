@@ -1,9 +1,8 @@
 <?php
 
 // Bejelentkezési form elküldöttségének ellenőrzése
-if(isset($_POST["hiddenField"]))
+if($_SERVER["REQUEST_METHOD"] == "POST")
 {
-
 	if(loginCheck())
 	{
 		$loginEmail = mysql_real_escape_string($_POST['txtEmail']);
@@ -11,20 +10,20 @@ if(isset($_POST["hiddenField"]))
 		$loginPwd = mysql_real_escape_string($_POST['txtPassword']);
 		$loginPwd = md5($loginPwd);
 	
-		$sqlLoginResult = mysql_query("SELECT * FROM $tblName1 Where $tbl1D='$loginEmail' AND $tbl1C='$loginPwd'");
+		$sqlLoginResult = mysql_query("SELECT * FROM users WHERE useremail='$loginEmail' AND userpwd='$loginPwd'");
 		$loginData = mysql_fetch_assoc($sqlLoginResult);
 		$isLoginDataValid = mysql_num_rows($sqlLoginResult);
 	
 		if($isLoginDataValid == 1)
 		{ 
-			$_SESSION["sessionLoginName"] = $loginData[$tbl1B];
+			$_SESSION['sessionLoginName'] = $loginData['username'];
 		
 			$randomLoginId = md5(createRandomId());
 		
-			setcookie("loginName", $loginData[$tbl1B], time()+600000);
+			setcookie("loginName", $loginData['username'], time()+600000);
 			setcookie("loginId", $randomLoginId, time()+600000);
 			
-			mysql_query("UPDATE $tblName1 SET $tbl1E = '$randomLoginId' WHERE $tbl1B = '$loginData[$tbl1B]'");
+			mysql_query("UPDATE users SET sessionID = '$randomLoginId' WHERE username = '$loginData[username]'");
 		
 			header("location:posts.php");
 		}
@@ -56,9 +55,9 @@ function showJsAlertbox($alertMessage)
 {
 	?>
 	<script type="text/javascript">
-	alert("<? echo$alertMessage; ?>"); 
+	alert("<?php echo$alertMessage; ?>"); 
 	</script>
-    <?
+    <?php
 }
 
 // Random karakterlánc generálása
@@ -79,4 +78,5 @@ function createRandomId() {
 
     return $pass; 
 } 
+
 ?>

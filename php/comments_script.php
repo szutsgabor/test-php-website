@@ -1,33 +1,35 @@
 <?php
 $sessionLoginName = $_SESSION['sessionLoginName'];
+$postID = $_GET['postID'];
+
+$sqlPostResult = mysql_query("SELECT * FROM posts WHERE postID = '$postID'");
+$postData = mysql_fetch_assoc($sqlPostResult);
 
 // Form elküldöttségének ellenőrzése
 if($_SERVER["REQUEST_METHOD"] == "POST")
 {
-	if(postsCheck())
+	if(commentsCheck())
 	{
-		echo"loler";
-		$postContentUnstripped = mysql_real_escape_string($_POST['txtContent']);
-		$postContent = strip_tags($postContentUnstripped);
-		echo"$postContent";
-		if(!mysql_query("INSERT INTO posts (username, content) VALUES ('$sessionLoginName', '$postContent')"))
+		$commentContentUnstripped = mysql_real_escape_string($_POST['txtContent']);
+		$commentContent = strip_tags($commentContentUnstripped);
+		if(!mysql_query("INSERT INTO comments (postID, username, comment) VALUES ('$postID', '$sessionLoginName', '$commentContent')"))
 			{
 				showJsAlertbox('Hiba történt az adatok feldolgozása közben, próbáld újra!');
-				header("location:posts.php");
+				header("location:comments.php?postID=$postID");
 			}
 			else
 			{
-				header("location:posts.php");
+				header("location:comments.php?postID=$postID");
 			}
 	}
 	else
 	{
-		header("location:posts.php");
+		header("location:comments.php?postID=$postID");
 	}
 }
 
 //mezők kitöltöttségének ellenőrzése
-function postsCheck()
+function commentsCheck()
 {
 	if($_POST['txtContent'] == "")
 	{

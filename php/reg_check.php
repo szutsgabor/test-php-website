@@ -1,6 +1,6 @@
 <?php
 // Form elküldöttségének ellenőrzése
-if(isset($_POST["hiddenField"]))
+if($_SERVER["REQUEST_METHOD"] == "POST")
 {
 	if(registerCheck())
 	{
@@ -10,7 +10,7 @@ if(isset($_POST["hiddenField"]))
 		
 		$registerPassword = md5($registerPassword);
 
-		$sqlNameCheckResult = mysql_query("SELECT * FROM $tblName1 WHERE $tbl1B='$registerUsername' OR $tbl1D='$registerEmail'");
+		$sqlNameCheckResult = mysql_query("SELECT * FROM users WHERE username='$registerUsername' OR useremail='$registerEmail'");
 		$isUsernameTaken = mysql_num_rows($sqlNameCheckResult);
 		if($isUsernameTaken == 1)
 		{
@@ -19,7 +19,7 @@ if(isset($_POST["hiddenField"]))
 		}
 		else
 		{
-			if(!mysql_query("INSERT INTO $tblName1 ($tbl1B, $tbl1C, $tbl1D) VALUES ('$registerUsername', '$registerPassword', '$registerEmail')"))
+			if(!mysql_query("INSERT INTO users (username, userpwd, useremail) VALUES ('$registerUsername', '$registerPassword', '$registerEmail')"))
 			{
 				showJsAlertbox('Sikertelen regisztráció, próbáld újra!');
 				header("location:register.php");
@@ -60,8 +60,8 @@ function showJsAlertbox($alertMessage)
 {
 	?>
 	<script type="text/javascript">
-	alert("<? echo$alertMessage; ?>"); 
+	alert("<?php echo$alertMessage; ?>"); 
 	</script>
-    <?
+    <?php
 }
 ?>

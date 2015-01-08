@@ -2,7 +2,6 @@
 session_start();						//session indítása
 $isPageRequireLogin = true;
 include("mysql/mysql_connect.php"); 	//mysql adatokat tároló file beolvasása
-include("mysql/mysql_columns.php");		//mysql oszlopneveket tároló file beolvasása
 include("php/cookie_login.php");		//Cookie bejelentkezés
 include("php/posts_script.php");		//Postokat feldolgozó php file
 ?>
@@ -18,23 +17,26 @@ include("php/posts_script.php");		//Postokat feldolgozó php file
 	<body>
 		<div id="header">
 			<div class="headerTitle">
-				Test website
+				Test website 
+			</div>
+			<div class="PostBoxTitles"> 
+				<a href="logout.php">
+					kijelentkezés
+				</a> 
 			</div>
 		</div>
-        
 		<div id="postContainer">
-        	<form id="postForm" action="posts.php" name="postForm" method="post">
-            		<input type="hidden" name="hiddenField" id="hiddenField" form="postForm">
-            	<p>
-                	<textarea name="txtContent" class="postForm" form="PostForm" rows="5" placeholder="Mond el mi jár a fejedben?"></textarea>
-                </p>
-                <p>
-               	  	<input type="submit" name="btnPost" class="loginForm" form="postForm" value="Küldés">
-                </p>
-            </form>
-            <p class="lineDecoration">
-        	</p>
-			<? include("php/posts_print.php"); ?>
+			<form id="postForm" action="posts.php" name="postForm" method="post">
+				<p>
+					<textarea name="txtContent" id="txtContent" wrap="physical" class="postForm" placeholder="Mond el mi jár a fejedben"></textarea>
+				</p>
+				<p>
+					<input type="button" name="btnPost" class="loginForm" form="postForm" value="Küldés" onClick="return 		postFormCheck(this.form, this.form.txtContent);">
+				</p>
+			</form>
+			<p class="lineDecoration"> 
+			</p>
+			<?php include("php/posts_print.php"); ?>
 		</div>
 	</body>
 </html>

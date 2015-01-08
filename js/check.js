@@ -1,3 +1,4 @@
+
 //Bejelentkezési form mezőinek ellenőrzése
 function loginFormCheck(form, loginEmail, loginPwd)
 {
@@ -95,8 +96,10 @@ function registerFormCheck(form, registerUser, registerEmail, registerPwd, regis
 	return true;
 }
 
+//Elfelejtett jelszó form mezőinek ellenőrzése
 function forgotFormCheck(form, forgotEmail)
 {
+	//Email cím kitöltöttségének ellenőrzése
 	if(forgotEmail.value == '')
 	{
 		alert('Nem írtad be az E-mail címed');
@@ -105,12 +108,30 @@ function forgotFormCheck(form, forgotEmail)
 		return false;
 	}
 	
+	//Email cím formátumának ellenőrzése
 	sampleChars = new RegExp("^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$");
 	if(!sampleChars.test(forgotEmail.value))
 	{
 		alert('A megadott E-mail cím nem megfelelő formátumú!');
 		form.forgotEmail.focus();
 		form.forgotEmail.select();
+		return false;
+	}
+	
+	//Form elküldése
+	form.submit();
+	return true;
+}
+
+//Post form mezőinek ellenőrzése
+function postFormCheck(form, postContent)
+{
+	//Szövegmező kitöltöttségének ellenőrzése
+	if(postContent.value == '')
+	{
+		alert('Nem írtál be tartalmat a mezőbe');
+		form.postContent.focus();
+		form.postContent.select();
 		return false;
 	}
 	

@@ -1,18 +1,18 @@
 <?php
-if(isset($_POST["hiddenField"]))
+if($_SERVER["REQUEST_METHOD"] == "POST")
 {
 	if(forgotCheck())
 	{
 		$forgotEmail = mysql_real_escape_string($_POST['txtEmail']);
 		
-		$sqlEmailCheckResult = mysql_query("SELECT * FROM $tblName1 WHERE $tbl1D='$forgotEmail'");
+		$sqlEmailCheckResult = mysql_query("SELECT * FROM users WHERE useremail='$forgotEmail'");
 		$isEmailValid = mysql_num_rows($sqlEmailCheckResult);
 		if($isEmailValid == 1)
 		{
 			$newPassword = createRandomPassword();
 			$newHashedPassword = md5($newPassword);
 			
-			if(!mysql_query("UPDATE $tblName1 SET $tbl1C = '$newHashedPassword' WHERE $tbl1D = '$forgotEmail'"))
+			if(!mysql_query("UPDATE username SET userpwd = '$newHashedPassword' WHERE useremail = '$forgotEmail'"))
 			{
 				showJsAlertbox('Új jelszó generálása sikertelen! próbáld újra');
 				header("location:forgot.php");
